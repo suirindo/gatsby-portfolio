@@ -1,8 +1,9 @@
 ---
 id: "6"
 title: "6つ目の記事"
-data: "2022-06-22"
-image: ""
-excerpt: ""
+date: "2021-03-06"
+image: "../images/pic6.jpg"
+excerpt: Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 ---
 
+これが6つ目のブログ記事です。

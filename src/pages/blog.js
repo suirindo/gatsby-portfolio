@@ -1,35 +1,47 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 const Blog = (props) => {
     return(
+    <>
       <div>
-        <h1>blog page</h1>
-        {props.data.allMarkdownRemark.edges.map((singleBlog, index) =>
+        <div>
+        <h1>Blog</h1>
+        <p>開発のtipsをお届けします。</p>
+            {props.data.allMarkdownRemark.edges.map((singleBlog, index) =>(
             <div key = {index}>
-                <h2>{singleBlog.node.frontmatter.title}</h2>
+              <div>
+                <h3>{singleBlog.node.frontmatter.title}</h3>
+                <p>{singleBlog.node.frontmatter.excerpt}</p>
                 <p>{singleBlog.node.frontmatter.date}</p>
-            </div>            
+                <Link to = {singleBlog.node.fields.slug}>Read More</Link>
+              </div>
+            </div>
+            )
         )}
+        </div>
       </div>
+    </>
      )
  }    
 export default Blog
 
 export const query = graphql`
-    query BlogQuery {
-        allMarkdownRemark {
-            edges {
-              node {
-                frontmatter {
-                  data
-                  excerpt
-                  id
-                  image
-                  title
-                }
-              }
-            }
-          }
+query BlogQuery {
+  allMarkdownRemark(sort: {fields: frontmatter___id, order: DESC}) {
+    edges {
+      node {
+        fields {
+          slug
         }
-        `
+        frontmatter {
+          date
+          excerpt
+          id
+          title
+        }
+      }
+    }
+  }
+}
+`
